@@ -34,7 +34,17 @@ RUN yarn config set network-timeout 240000 -g && yarn install
 RUN  yarn release 
 
 # Web App Runner image
-FROM nginx:1.23.3-alpine
+FROM nginx:1.23.4-alpine3.17
 
 COPY --from=builder /data/static /usr/share/nginx/html
 
+WORKDIR /app
+
+RUN chown -R nginx:nginx /app && chmod -R 755 /app && \
+        chown -R nginx:nginx /var/cache/nginx && \
+        chown -R nginx:nginx /var/log/nginx && \
+        chown -R nginx:nginx /etc/nginx/conf.d && \
+        touch /var/run/nginx.pid && \
+        chown -R nginx:nginx /var/run/nginx.pid
+
+USER nginx
