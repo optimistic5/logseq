@@ -2,7 +2,7 @@ name: build
 on:
   push:
     branches:
-      - intoduce-trivy
+      - introduce-trivy
   pull_request:
 jobs:
   build:
