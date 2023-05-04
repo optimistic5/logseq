@@ -1,25 +1,25 @@
-permissions: write-all
-name: build
-on:
-  push:
-    branches:
-      - introduce-trivy
-  pull_request:
-jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-20.04
-    steps:
+# permissions: write-all
+# name: build
+# on:
+#   push:
+#     branches:
+#       - introduce-trivy
+#   pull_request:
+# jobs:
+#   build:
+#     name: Build
+#     runs-on: ubuntu-20.04
+#     steps:
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: 'nginx:1.23.3-alpine'
-          # image-ref: 'ghcr.io/${{ github.repository_owner }}/logseq-webapp:latest'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+#       - name: Run Trivy vulnerability scanner
+#         uses: aquasecurity/trivy-action@master
+#         with:
+#           image-ref: 'nginx:1.23.3-alpine'
+#           # image-ref: 'ghcr.io/${{ github.repository_owner }}/logseq-webapp:latest'
+#           format: 'sarif'
+#           output: 'trivy-results.sarif'
 
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy-results.sarif'
+#       - name: Upload Trivy scan results to GitHub Security tab
+#         uses: github/codeql-action/upload-sarif@v2
+#         with:
+#           sarif_file: 'trivy-results.sarif'
